@@ -31,6 +31,13 @@ class HatSerializer(serializers.HyperlinkedModelSerializer):
         fields = '__all__'
 
 
+class IndividualHatSerializer(serializers.ModelSerializer):
+    """Hat serializer."""
 
+    brand = serializers.StringRelatedField(many=True)
+
+    class Meta:
+        model = Hat
+        fields = ('brand', 'price')
 
 
