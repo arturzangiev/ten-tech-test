@@ -27,12 +27,14 @@ class Hat(models.Model):
     TRILBY = 'TBY'
     PANAMA = 'PNM'
     FEZ = 'FEZ'
+    CAP = 'CAP'
     STYLES = (
         (FEDORA, 'Fedora'),
         (TOP_HAT, 'Top Hat'),
         (TRILBY, 'Trilby'),
         (PANAMA, 'Panama'),
         (FEZ, 'Fez'),
+        (CAP, 'Cap'),
     )
     style = models.CharField(_('style'), max_length=3, choices=STYLES)
     colour = models.CharField(max_length=20, null=True, blank=True)
