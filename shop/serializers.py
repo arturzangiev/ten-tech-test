@@ -16,7 +16,7 @@ class FootwearSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Footwear
-        fields = '__all__'
+        fields = ['url', 'price_currency', 'price', 'brand']
 
 
 class HatSerializer(serializers.HyperlinkedModelSerializer):
