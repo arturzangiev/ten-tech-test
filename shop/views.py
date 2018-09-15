@@ -14,12 +14,12 @@ class BrandViewSet(ModelViewSet):
 class FootwearViewSet(ModelViewSet):
     """Footwear views everything included."""
 
-    queryset = Footwear.objects.all()
+    queryset = Footwear.objects.all().order_by('price')
     serializer_class = FootwearSerializer
 
 
 class HatViewSet(ModelViewSet):
     """Hat views everything included."""
 
-    queryset = Hat.objects.all()
+    queryset = Hat.objects.all().order_by('price')
     serializer_class = HatSerializer
