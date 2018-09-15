@@ -14,12 +14,14 @@ class BrandSerializer(serializers.HyperlinkedModelSerializer):
 class FootwearSerializer(serializers.HyperlinkedModelSerializer):
     """Footwear serializer."""
 
+    brand = BrandSerializer()
+
     class Meta:
         model = Footwear
         exclude = ('style',)
 
 
-class HatSerializer(serializers.ModelSerializer):
+class HatSerializer(serializers.HyperlinkedModelSerializer):
     """Hat serializer."""
 
     brand = serializers.StringRelatedField(many=True)
