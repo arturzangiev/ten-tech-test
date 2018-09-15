@@ -35,7 +35,8 @@ class Hat(models.Model):
         (FEZ, 'Fez'),
     )
     style = models.CharField(_('style'), max_length=3, choices=STYLES)
-    brand = models.ForeignKey(Brand, verbose_name=_('brand'), related_name='hats')
+    colour = models.CharField(max_length=20, null=True, blank=True)
+    brand = models.ManyToManyField(Brand, verbose_name=_('brand'), related_name='hats', blank=True)
     price = MoneyField(max_digits=6, decimal_places=2, default_currency='GBP')
 
     class Meta:
