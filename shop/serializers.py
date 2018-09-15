@@ -16,12 +16,19 @@ class FootwearSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Footwear
-        fields = ['url', 'price_currency', 'price', 'brand']
+        exclude = ('style',)
 
 
-class HatSerializer(serializers.HyperlinkedModelSerializer):
+class HatSerializer(serializers.ModelSerializer):
     """Hat serializer."""
+
+    brand = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = Hat
         fields = '__all__'
+
+
+
+
+
