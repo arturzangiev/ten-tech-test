@@ -20,22 +20,19 @@ class Brand(models.Model):
         return self.__unicode__()
 
 
+class HatStyle(models.Model):
+    name = models.CharField(max_length=20)
+    abbreviation = models.CharField(max_length=3)
+
+    def __unicode__(self):
+        return self.name
+
+    def __str__(self):
+        return self.__unicode__()
+
+
 class Hat(models.Model):
-    FEDORA = 'FED'
-    TOP_HAT = 'TOP'
-    TRILBY = 'TBY'
-    PANAMA = 'PNM'
-    FEZ = 'FEZ'
-    CAP = 'CAP'
-    STYLES = (
-        (FEDORA, 'Fedora'),
-        (TOP_HAT, 'Top Hat'),
-        (TRILBY, 'Trilby'),
-        (PANAMA, 'Panama'),
-        (FEZ, 'Fez'),
-        (CAP, 'Cap'),
-    )
-    style = models.CharField(_('style'), max_length=3, choices=STYLES)
+    style = models.ForeignKey(HatStyle, verbose_name=_('style'), related_name='hat')
     colour = models.CharField(max_length=20, null=True, blank=True)
     brand = models.ManyToManyField(Brand, verbose_name=_('brand'), related_name='hats', blank=True)
     price = MoneyField(max_digits=6, decimal_places=2, default_currency='GBP')
@@ -51,7 +48,7 @@ class Hat(models.Model):
     def __unicode__(self):
         return '{style_of_hat} by {brand} at {price}'.format(
             style_of_hat=self.style,
-            brand=self.brand.all().values('name'),
+            brand=list(self.brand.all().values_list('name')),
             price=self.price,
         )
 
@@ -59,20 +56,19 @@ class Hat(models.Model):
         return self.__unicode__()
 
 
+class FootwearStyle(models.Model):
+    name = models.CharField(max_length=20)
+    abbreviation = models.CharField(max_length=3)
+
+    def __unicode__(self):
+        return self.name
+
+    def __str__(self):
+        return self.__unicode__()
+
+
 class Footwear(models.Model):
-    OXFORD = 'OXF'
-    DERBY = 'DRB'
-    BROGUE = 'BRG'
-    MONK = 'MNK'
-    BALMORAL = 'BML'
-    STYLES = (
-        (OXFORD, 'Oxford'),
-        (DERBY, 'Derby'),
-        (BROGUE, 'Brogue'),
-        (MONK, 'Monk'),
-        (BALMORAL, 'Balmoral'),
-    )
-    style = MultiSelectField(choices=STYLES)
+    style = models.ManyToManyField(FootwearStyle)
     brand = models.ForeignKey(Brand, verbose_name=_('brand'), related_name='footwear')
     price = MoneyField(max_digits=6, decimal_places=2, default_currency='GBP')
 

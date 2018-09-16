@@ -16,3 +16,13 @@ class HatAdmin(admin.ModelAdmin):
 @admin.register(models.Footwear)
 class FootwearAdmin(admin.ModelAdmin):
     """Footwear admin."""
+
+
+@admin.register(models.FootwearStyle)
+class FootwearStyleAdmin(admin.ModelAdmin):
+    """Footwear admin."""
+
+
+@admin.register(models.HatStyle)
+class HatStyleAdmin(admin.ModelAdmin):
+    """Footwear admin."""
