@@ -47,3 +47,8 @@ class BasketViewSet(ModelViewSet):
             queryset = Order.objects.all().filter(user=self.request.user)
 
         return queryset
+
+    # def create(self, request, *args, **kwargs):
+    #     data = request.data
+    #     order = Order.objects.create(user=data['user'], hat_id=data['hat'])
+    #     print(data)

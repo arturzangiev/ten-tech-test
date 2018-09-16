@@ -39,11 +39,14 @@ class IndividualHatSerializer(serializers.ModelSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     """Hat serializer."""
 
-    hat = HatSerializer(many=True)
-    footwear = FootwearSerializer(many=True)
+    # hat = HatSerializer(many=True)
+    # footwear = FootwearSerializer(many=True, read_only=True)
+
+    # hat = serializers.PrimaryKeyRelatedField(many=True)
+    # footwear = serializers.PrimaryKeyRelatedField(many=True)
 
     class Meta:
         model = Order
         # fields = '__all__'
 
-        fields = ('id', 'created_date', 'updated_date', 'user', 'hat', 'footwear', 'total_hat', 'total_footwear')
+        fields = ('id', 'created_date', 'updated_date', 'user', 'hat', 'footwear', 'total_hat', 'total_footwear', 'total_all')

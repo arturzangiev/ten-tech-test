@@ -102,12 +102,15 @@ class Order(models.Model):
 
     @property
     def total_hat(self):
-        return self.hat.all().aggregate(Sum('price'))
+        return self.hat.all().aggregate(Sum('price'))['price__sum']
 
     @property
     def total_footwear(self):
-        return self.footwear.all().aggregate(Sum('price'))
+        return self.footwear.all().aggregate(Sum('price'))['price__sum']
 
+    @property
+    def total_all(self):
+        return self.total_hat + self.total_footwear
 
     # def __unicode__(self):
     #     return self.id
