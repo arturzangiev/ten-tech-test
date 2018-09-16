@@ -40,8 +40,10 @@ class OrderSerializer(serializers.ModelSerializer):
     """Hat serializer."""
 
     hat = HatSerializer(many=True)
+    footwear = FootwearSerializer(many=True)
 
     class Meta:
         model = Order
-        fields = '__all__'
-        # fields = ('price', 'brand_meta')
+        # fields = '__all__'
+
+        fields = ('id', 'created_date', 'updated_date', 'user', 'hat', 'footwear', 'total_hat', 'total_footwear')

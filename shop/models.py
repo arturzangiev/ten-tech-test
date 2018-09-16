@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from djmoney.models.fields import MoneyField
 from django.conf import settings
+from django.db.models import Sum
 
 User = settings.AUTH_USER_MODEL
 
@@ -98,6 +99,15 @@ class Order(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    @property
+    def total_hat(self):
+        return self.hat.all().aggregate(Sum('price'))
+
+    @property
+    def total_footwear(self):
+        return self.footwear.all().aggregate(Sum('price'))
+
 
     # def __unicode__(self):
     #     return self.id
