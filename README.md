@@ -33,12 +33,12 @@ There are inital models set up for a Shop application. This repo should be forke
 
 ### Challenge #4
 * Create a basket endpoint
-    * This endpoint should allow a user to buy multiple hats and multiple footwear items in 1 request
+    * This endpoint should allow a user to buy multiple hats and multiple footwear items in 1 request (format of post request is {"hat": [1,2], "footwear": [4,5]})
     * There should be a total price that sums the price of everything in the basket 
     * There should be a field for total price of hats in the basket
     * There should be a field for total price of footwear in the basket
     * There should be a timestamp to track when the basket book was created and last updated 
-* A user should be able to see their own basket books but noone else's
+* A user should be able to see their own basket books but noone else's (logged in user see his own orders and can place an order)
     * The time in which the booking was returned should be displayed
         * The time should be returned in isoformat
 * Superusers can see everyones basket books

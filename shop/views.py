@@ -49,11 +49,17 @@ class BasketViewSet(ModelViewSet):
         return queryset
 
     def create(self, request, *args, **kwargs):
-        # data = request.data
+        data = request.data
+        hat_ids = data.get('hat') if isinstance(data.get('hat'), (list,)) else list()
+        footwear_ids = data.get('footwear') if isinstance(data.get('footwear'), (list,)) else list()
         order = Order.objects.create(user=self.request.user)
+        for hat_id in hat_ids:
+            hat = Hat.objects.get(id=hat_id)
+            order.hat.add(hat)
+        for footwear_id in footwear_ids:
+            footwear = Footwear.objects.get(id=footwear_id)
+            order.footwear.add(footwear)
+
         order.save()
 
-        serializer = BasketViewSet(order)
-        return Response(serializer.data)
-
-        # print(data)
+        return Response("Order is placed")
