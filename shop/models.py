@@ -24,6 +24,10 @@ class HatStyle(models.Model):
     name = models.CharField(max_length=20)
     abbreviation = models.CharField(max_length=3)
 
+    class Meta:
+        verbose_name = 'Hatstyle'
+        verbose_name_plural = 'Hatstyles'
+
     def __unicode__(self):
         return self.name
 
@@ -32,7 +36,7 @@ class HatStyle(models.Model):
 
 
 class Hat(models.Model):
-    style = models.ForeignKey(HatStyle, verbose_name=_('style'), related_name='hat')
+    style = models.ForeignKey(HatStyle, verbose_name=_('hatstyle'), related_name='hat')
     colour = models.CharField(max_length=20, null=True, blank=True)
     brand = models.ManyToManyField(Brand, verbose_name=_('brand'), related_name='hats', blank=True)
     price = MoneyField(max_digits=6, decimal_places=2, default_currency='GBP')
@@ -60,6 +64,10 @@ class FootwearStyle(models.Model):
     name = models.CharField(max_length=20)
     abbreviation = models.CharField(max_length=3)
 
+    class Meta:
+        verbose_name = 'Footwearstyle'
+        verbose_name_plural = 'Footwearstyles'
+
     def __unicode__(self):
         return self.name
 
@@ -68,7 +76,7 @@ class FootwearStyle(models.Model):
 
 
 class Footwear(models.Model):
-    style = models.ManyToManyField(FootwearStyle)
+    style = models.ManyToManyField(FootwearStyle, verbose_name=_('footwearstyle'), related_name='footwearstyles')
     brand = models.ForeignKey(Brand, verbose_name=_('brand'), related_name='footwear')
     price = MoneyField(max_digits=6, decimal_places=2, default_currency='GBP')
 

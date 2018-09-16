@@ -25,7 +25,7 @@ class HatSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Hat
-        fields = ('url', 'style', 'colour', 'price_currency', 'price', 'brand', 'brand_meta')
+        fields = ('url', 'colour', 'price_currency', 'price', 'brand', 'brand_meta')
 
 
 class IndividualHatSerializer(serializers.ModelSerializer):
