@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from shop.models import Brand, Footwear, Hat
+from shop.models import Brand, Footwear, Hat, Order
 
 
 class BrandSerializer(serializers.HyperlinkedModelSerializer):
@@ -16,7 +16,7 @@ class FootwearSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Footwear
-        fields = ('url', 'price_currency', 'price', 'brand', 'brand_meta', 'style')
+        fields = ('url', 'price_currency', 'price', 'brand', 'brand_meta')
         # exclude = ('style',)
 
 
@@ -25,7 +25,7 @@ class HatSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Hat
-        fields = ('url', 'style', 'colour', 'price_currency', 'price', 'brand', 'brand_meta')
+        fields = ('url', 'colour', 'price_currency', 'price', 'brand', 'brand_meta')
 
 
 class IndividualHatSerializer(serializers.ModelSerializer):
@@ -36,3 +36,12 @@ class IndividualHatSerializer(serializers.ModelSerializer):
         fields = ('price', 'brand_meta')
 
 
+class OrderSerializer(serializers.ModelSerializer):
+    """Hat serializer."""
+
+    hat = HatSerializer(many=True)
+
+    class Meta:
+        model = Order
+        fields = '__all__'
+        # fields = ('price', 'brand_meta')

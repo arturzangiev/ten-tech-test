@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 
-from shop.models import Brand, Footwear, Hat
-from shop.serializers import BrandSerializer, FootwearSerializer, HatSerializer, IndividualHatSerializer
+from shop.models import Brand, Footwear, Hat, Order
+from shop.serializers import BrandSerializer, FootwearSerializer, HatSerializer, IndividualHatSerializer, OrderSerializer
 from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
 
@@ -33,3 +33,17 @@ class HatViewSet(ModelViewSet):
         instance = self.get_object()
         serializer = IndividualHatSerializer(instance)
         return Response(serializer.data)
+
+
+class BasketViewSet(ModelViewSet):
+    """Brand views everything included."""
+    serializer_class = OrderSerializer
+    authentication_classes = [TokenAuthentication, ]
+
+    def get_queryset(self):
+        if self.request.user.is_superuser is True:
+            queryset = Order.objects.all()
+        else:
+            queryset = Order.objects.all().filter(user=self.request.user)
+
+        return queryset
