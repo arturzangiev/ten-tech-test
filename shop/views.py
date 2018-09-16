@@ -3,6 +3,7 @@ from rest_framework.viewsets import ModelViewSet
 from shop.models import Brand, Footwear, Hat
 from shop.serializers import BrandSerializer, FootwearSerializer, HatSerializer, IndividualHatSerializer
 from rest_framework.response import Response
+from rest_framework.authentication import TokenAuthentication
 
 
 class BrandViewSet(ModelViewSet):
@@ -10,6 +11,7 @@ class BrandViewSet(ModelViewSet):
 
     queryset = Brand.objects.all()
     serializer_class = BrandSerializer
+    authentication_classes = [TokenAuthentication, ]
 
 
 class FootwearViewSet(ModelViewSet):
@@ -17,6 +19,7 @@ class FootwearViewSet(ModelViewSet):
 
     queryset = Footwear.objects.all().order_by('price')
     serializer_class = FootwearSerializer
+    authentication_classes = [TokenAuthentication,]
 
 
 class HatViewSet(ModelViewSet):
@@ -24,6 +27,7 @@ class HatViewSet(ModelViewSet):
 
     queryset = Hat.objects.all().order_by('price')
     serializer_class = HatSerializer
+    authentication_classes = [TokenAuthentication, ]
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()

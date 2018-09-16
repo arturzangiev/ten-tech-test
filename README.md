@@ -25,7 +25,7 @@ There are inital models set up for a Shop application. This repo should be forke
 
 ### Challenge #3
 * Only superusers should be able to write to the hat, footwear and brand endpoints
-* All users should be able to read the hat, footwear and brand endpoints
+* All users should be able to read the hat, footwear and brand endpoints (assumption: unauthenticated user can't read)
 * Allow styles to be editable via the admin panel
 
 
