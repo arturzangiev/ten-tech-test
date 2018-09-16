@@ -26,3 +26,9 @@ class FootwearStyleAdmin(admin.ModelAdmin):
 @admin.register(models.HatStyle)
 class HatStyleAdmin(admin.ModelAdmin):
     """Footwear admin."""
+
+
+@admin.register(models.Order)
+class OrderAdmin(admin.ModelAdmin):
+    """Footwear admin."""
+    list_display = ('id', 'created_date', 'updated_date', 'user')

@@ -1,8 +1,9 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-
 from djmoney.models.fields import MoneyField
-from multiselectfield import MultiSelectField
+from django.conf import settings
+
+User = settings.AUTH_USER_MODEL
 
 
 class Brand(models.Model):
@@ -89,3 +90,17 @@ class Footwear(models.Model):
 
     def __str__(self):
         return self.__unicode__()
+
+
+class Order(models.Model):
+    hat = models.ManyToManyField(Hat, blank=True)
+    footwear = models.ManyToManyField(Footwear, blank=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    # def __unicode__(self):
+    #     return self.id
+    #
+    # def __str__(self):
+    #     return self.__unicode__()
