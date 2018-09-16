@@ -102,11 +102,17 @@ class Order(models.Model):
 
     @property
     def total_hat(self):
-        return self.hat.all().aggregate(Sum('price'))['price__sum']
+        total_hat = self.hat.all().aggregate(Sum('price')).get('price__sum')
+        if total_hat is None:
+            total_hat = 0
+        return total_hat
 
     @property
     def total_footwear(self):
-        return self.footwear.all().aggregate(Sum('price'))['price__sum']
+        total_footwear = self.footwear.all().aggregate(Sum('price')).get('price__sum')
+        if total_footwear is None:
+            total_footwear = 0
+        return total_footwear
 
     @property
     def total_all(self):
