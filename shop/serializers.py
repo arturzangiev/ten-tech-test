@@ -14,30 +14,25 @@ class BrandSerializer(serializers.HyperlinkedModelSerializer):
 class FootwearSerializer(serializers.HyperlinkedModelSerializer):
     """Footwear serializer."""
 
-    brand = BrandSerializer()
-
     class Meta:
         model = Footwear
-        exclude = ('style',)
+        fields = ('url', 'price_currency', 'price', 'brand', 'brand_meta')
+        # exclude = ('style',)
 
 
 class HatSerializer(serializers.HyperlinkedModelSerializer):
     """Hat serializer."""
 
-    brand = serializers.StringRelatedField(many=True)
-
     class Meta:
         model = Hat
-        fields = '__all__'
+        fields = ('url', 'style', 'colour', 'price_currency', 'price', 'brand', 'brand_meta')
 
 
 class IndividualHatSerializer(serializers.ModelSerializer):
     """Hat serializer."""
 
-    brand = serializers.StringRelatedField(many=True)
-
     class Meta:
         model = Hat
-        fields = ('brand', 'price')
+        fields = ('price', 'brand_meta')
 
 

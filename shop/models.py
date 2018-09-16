@@ -4,8 +4,6 @@ from django.utils.translation import ugettext_lazy as _
 from djmoney.models.fields import MoneyField
 from multiselectfield import MultiSelectField
 
-# Create your models here.
-
 
 class Brand(models.Model):
     name = models.CharField(max_length=100)
@@ -46,10 +44,14 @@ class Hat(models.Model):
         verbose_name = 'Hat'
         verbose_name_plural = 'Hats'
 
+    @property
+    def brand_meta(self):
+        return self.brand.all().values('name')
+
     def __unicode__(self):
         return '{style_of_hat} by {brand} at {price}'.format(
             style_of_hat=self.style,
-            brand=self.brand.name,
+            brand=self.brand.all().values('name'),
             price=self.price,
         )
 
@@ -77,6 +79,10 @@ class Footwear(models.Model):
     class Meta:
         verbose_name = 'Footwear'
         verbose_name_plural = 'Footwear'
+
+    @property
+    def brand_meta(self):
+        return {"name": self.brand.name, "description": self.brand.description}
 
     def __unicode__(self):
         return '{style_of_footwear} by {brand} at {price}'.format(
